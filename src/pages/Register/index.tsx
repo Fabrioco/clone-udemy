@@ -17,6 +17,8 @@ export default function Register() {
     }
   };
 
+  const handleAcceptTerms = () => setAcceptedTerms(!acceptedTerms);
+
   const handleRegister = () => {
     if (!acceptedTerms) return;
     if (!emailInput || !passwordInput) {
@@ -74,12 +76,16 @@ export default function Register() {
             </i>
           </div>
         </div>
-        <div className="flex w-full items-center justify-between">
+        <div
+          className="flex w-full items-center justify-between"
+          onClick={handleAcceptTerms}
+        >
           <label htmlFor="keepLoggedCheckbox">Li e aceito os termos.</label>
           <input
             type="checkbox"
             name="keepLoggedCheckbox"
             className="w-8 h-8 appearance-none rounded-full checked:bg-gray-600 border-2 cursor-pointer"
+            checked={acceptedTerms}
           />
         </div>
         <button
