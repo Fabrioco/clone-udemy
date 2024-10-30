@@ -2,20 +2,33 @@ import React from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function Login() {
-  const passwordInput = React.useRef<HTMLInputElement | null>(null);
+  const passwordInputRef = React.useRef<HTMLInputElement | null>(null);
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
+  const [emailInput, setEmailInput] = React.useState<string>("");
+  const [passwordInput, setPasswordInput] = React.useState<string>("");
+
   const togglePassword = () => {
-    if (passwordInput.current) {
-      passwordInput.current.type =
-        passwordInput.current.type === "password" ? "text" : "password";
+    const input = passwordInputRef.current;
+    if (input) {
+      input.type = input.type === "password" ? "text" : "password";
       setShowPassword(!showPassword);
+    }
+  };
+
+  const handleLogin = () => {
+    if (!emailInput || !passwordInput) {
+      alert("Preencha todos os campos");
+      return;
     }
   };
 
   return (
     <div className="container mx-auto w-[600px] h-[700px] bg-white rounded-2xl flex flex-col items-center justify-around border border-gray-300">
       <h1 className="font-primary text-4xl uppercase">Login</h1>
-      <form className="w-6/12 text-xl flex flex-col items-center justify-between font-secondary gap-8">
+      <form
+        className="w-6/12 text-xl flex flex-col items-center justify-between font-secondary gap-8"
+        onSubmit={handleLogin}
+      >
         <div className="flex flex-col justify-center w-full gap-1">
           <label htmlFor="emailInputLogin">Email</label>
           <input
@@ -23,6 +36,8 @@ export default function Login() {
             placeholder="exemplo@gmail.com"
             name="emailInputLogin"
             className="w-full bg-gray-200 px-4 py-2 rounded-md outline-none"
+            value={emailInput}
+            onChange={(e) => setEmailInput(e.target.value)}
           />
         </div>
         <div className="flex flex-col justify-center w-full gap-1">
@@ -34,8 +49,10 @@ export default function Login() {
               name="passwordInputLogin"
               placeholder="********"
               min={8}
-              ref={passwordInput}
+              ref={passwordInputRef}
               autoComplete="off"
+              value={passwordInput}
+              onChange={(e) => setPasswordInput(e.target.value)}
             />
             <i
               className="cursor-pointer text-gray-400"
@@ -45,15 +62,18 @@ export default function Login() {
             </i>
           </div>
         </div>
-        <div className="flex gap-2 items-center">
+        <div className="flex w-full items-center justify-between">
+          <label htmlFor="keepLoggedCheckbox">Permanecer conectado?</label>
           <input
             type="checkbox"
             name="keepLoggedCheckbox"
             className="w-8 h-8 appearance-none rounded-full checked:bg-gray-600 border-2 cursor-pointer"
           />
-          <label htmlFor="keepLoggedCheckbox">Permanecer conectado?</label>
         </div>
-        <button className="bg-gray-200 px-8 py-4 font-tertiary uppercase rounded-md shadow-sm shadow-black active:bg-gray-400 active:shadow-md active:shadow-gray-400">
+        <button
+          className="bg-gray-200 px-8 py-4 font-tertiary uppercase rounded-md shadow-sm shadow-black active:bg-gray-400 active:shadow-md active:shadow-gray-400"
+          type="submit"
+        >
           Confirmar
         </button>
       </form>
