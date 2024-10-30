@@ -44,7 +44,7 @@ export default function Login() {
           <label htmlFor="passwordInputLogin">Senha</label>
           <div className="flex bg-gray-200 rounded-md w-full px-4 py-2 ">
             <input
-              className="bg-gray-200 outline-none"
+              className="w-full bg-gray-200 rounded-md outline-none"
               type="password"
               name="passwordInputLogin"
               placeholder="********"
