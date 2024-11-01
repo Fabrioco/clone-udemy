@@ -1,11 +1,15 @@
 import React from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useAuth } from "../../contexts/authContext";
 
 export default function Register() {
+  const { signUp } = useAuth();
+
   const passwordInputRef = React.useRef<HTMLInputElement>(null);
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
   const [acceptedTerms, setAcceptedTerms] = React.useState<boolean>(false);
 
+  const [nameInput, setNameInput] = React.useState<string>("");
   const [emailInput, setEmailInput] = React.useState<string>("");
   const [passwordInput, setPasswordInput] = React.useState<string>("");
 
@@ -19,12 +23,14 @@ export default function Register() {
 
   const handleAcceptTerms = () => setAcceptedTerms(!acceptedTerms);
 
-  const handleRegister = () => {
+  const handleRegister = (e: React.FormEvent) => {
+    e.preventDefault();
     if (!acceptedTerms) return;
     if (!emailInput || !passwordInput) {
       alert("Preencha todos os campos");
       return;
     }
+    signUp(nameInput, emailInput, passwordInput);
   };
 
   return (
@@ -41,6 +47,8 @@ export default function Register() {
             name="nameInputRegister"
             className="w-full bg-gray-200 px-4 py-2 rounded-md outline-none"
             placeholder="Nome aqui"
+            value={nameInput}
+            onChange={(e) => setNameInput(e.target.value)}
           />
         </div>
         <div className="flex flex-col justify-center w-full gap-1">
@@ -86,6 +94,7 @@ export default function Register() {
             name="keepLoggedCheckbox"
             className="w-8 h-8 appearance-none rounded-full checked:bg-gray-600 border-2 cursor-pointer"
             checked={acceptedTerms}
+            onChange={(e) => setAcceptedTerms(e.target.checked)}
           />
         </div>
         <button

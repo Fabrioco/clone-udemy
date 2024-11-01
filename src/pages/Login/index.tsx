@@ -1,11 +1,14 @@
 import React from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useAuth } from "../../contexts/authContext";
 
 export default function Login() {
   const passwordInputRef = React.useRef<HTMLInputElement | null>(null);
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
   const [emailInput, setEmailInput] = React.useState<string>("");
   const [passwordInput, setPasswordInput] = React.useState<string>("");
+
+  const { signIn } = useAuth();
 
   const togglePassword = () => {
     const input = passwordInputRef.current;
@@ -15,11 +18,13 @@ export default function Login() {
     }
   };
 
-  const handleLogin = () => {
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
     if (!emailInput || !passwordInput) {
       alert("Preencha todos os campos");
       return;
     }
+    signIn(emailInput, passwordInput);
   };
 
   return (
