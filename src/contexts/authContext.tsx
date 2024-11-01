@@ -21,7 +21,7 @@ interface AuthProviderProps {
   children: React.ReactNode;
 }
 
-interface UserDataProps {
+export interface UserDataProps {
   uid: string;
   name: string;
   email: string;

@@ -1,9 +1,19 @@
 import { useParams } from "react-router-dom";
+import { loadDataUser } from "../../hooks/LoadDataUser";
+import { UserDataProps } from "../../contexts/authContext";
+import React from "react";
 
 export default function Dashboard() {
   const { uid } = useParams();
 
-
+  React.useEffect(() => {
+    const loadData = async () => {
+      if (uid) {
+        const data = await loadDataUser(uid);
+      }
+    };
+    loadData();
+  }, [uid]);
 
   return (
     <div>
