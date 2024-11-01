@@ -7,11 +7,14 @@ import {
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { FirebaseError } from "firebase/app";
 import { useNavigate } from "react-router-dom";
+import { useNotification } from "./notificationContext";
 
 type AuthContextType = {
   signUp: (name: string, email: string, password: string) => Promise<void>;
 
   signIn: (email: string, password: string) => Promise<void>;
+
+  userData: UserDataProps | undefined;
 };
 
 interface AuthProviderProps {
@@ -29,6 +32,7 @@ const AuthContext = React.createContext<AuthContextType>({} as AuthContextType);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const navigate = useNavigate();
+  const { showNotification } = useNotification();
 
   const [userData, setUserData] = React.useState<UserDataProps>();
 
@@ -87,11 +91,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       };
       setUserData(data);
       navigate(`/dashboard/${uid}`);
+      showNotification("Bem vindo de volta!", "success");
     }
   };
 
   return (
-    <AuthContext.Provider value={{ signUp, signIn }}>
+    <AuthContext.Provider value={{ signUp, signIn, userData }}>
       {children}
     </AuthContext.Provider>
   );
