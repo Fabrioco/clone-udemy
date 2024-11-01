@@ -8,24 +8,16 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { FirebaseError } from "firebase/app";
 import { useNavigate } from "react-router-dom";
 import { useNotification } from "./notificationContext";
+import { UserDataProps, useUser } from "./userDataContext";
 
 type AuthContextType = {
   signUp: (name: string, email: string, password: string) => Promise<void>;
 
   signIn: (email: string, password: string) => Promise<void>;
-
-  userData: UserDataProps | undefined;
 };
 
 interface AuthProviderProps {
   children: React.ReactNode;
-}
-
-export interface UserDataProps {
-  uid: string;
-  name: string;
-  email: string;
-  password: string;
 }
 
 const AuthContext = React.createContext<AuthContextType>({} as AuthContextType);
@@ -33,8 +25,7 @@ const AuthContext = React.createContext<AuthContextType>({} as AuthContextType);
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const navigate = useNavigate();
   const { showNotification } = useNotification();
-
-  const [userData, setUserData] = React.useState<UserDataProps>();
+  const { setUser } = useUser();
 
   const signUp = async (
     name: string,
@@ -61,7 +52,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         password,
       };
       navigate(`/dashboard/${uid}`);
-      setUserData(data);
+      setUser(data);
     } catch (error) {
       if (error instanceof FirebaseError) {
         if (error.code === "auth/email-already-in-use") {
@@ -89,14 +80,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         email: docSnap.data()?.email,
         password: docSnap.data()?.password,
       };
-      setUserData(data);
+      setUser(data);
       navigate(`/dashboard/${uid}`);
       showNotification("Bem vindo de volta!", "success");
     }
   };
 
   return (
-    <AuthContext.Provider value={{ signUp, signIn, userData }}>
+    <AuthContext.Provider value={{ signUp, signIn }}>
       {children}
     </AuthContext.Provider>
   );
