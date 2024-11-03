@@ -34,7 +34,7 @@ export default function Register() {
   };
 
   return (
-    <div className="container flex flex-col bg-white w-[600px] h-[700px] items-center justify-around rounded-2xl border border-gray-300">
+    <div className="container flex flex-col bg-white w-[600px] h-[700px] items-center justify-around rounded-2xl border border-gray-300 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
       <h1 className="font-primary text-4xl uppercase">Registrar</h1>
       <form
         onSubmit={handleRegister}

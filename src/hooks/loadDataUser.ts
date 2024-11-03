@@ -1,6 +1,6 @@
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../services/firebaseConnection";
-import { UserDataProps } from "../contexts/authContext";
+import { UserDataProps } from "../contexts/userDataContext";
 
 export const loadDataUser = async (
   uid: string

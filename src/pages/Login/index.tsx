@@ -28,7 +28,7 @@ export default function Login() {
   };
 
   return (
-    <div className="container mx-auto w-[600px] h-[700px] bg-white rounded-2xl flex flex-col items-center justify-around border border-gray-300">
+    <div className="container mx-auto w-[600px] h-[700px] bg-white rounded-2xl flex flex-col items-center justify-around border border-gray-300 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
       <h1 className="font-primary text-4xl uppercase">Login</h1>
       <form
         className="w-6/12 text-xl flex flex-col items-center justify-between font-secondary gap-8"

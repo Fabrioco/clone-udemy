@@ -1,6 +1,6 @@
 export default function NotFound() {
   return (
-    <div className="container flex flex-col h-[500px] w-[500px] justify-center items-center bg-white rounded-3xl border border-gray-300">
+    <div className="flex flex-col h-[500px] w-[500px] justify-center items-center bg-white rounded-3xl border border-gray-300 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
       <h1 className="text-5xl font-primary">ERROR 404</h1>
       <h2 className="text-4xl font-secondary">NOT FOUND</h2>
       <a
