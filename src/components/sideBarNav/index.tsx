@@ -8,9 +8,24 @@ import {
 import { BiBookAlt } from "react-icons/bi";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { PiMoney } from "react-icons/pi";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useUser } from "../../contexts/userDataContext";
 
 export const SidebarNav = () => {
+  const location = useLocation();
   const [isOpenSidebar, setIsOpenSidebar] = React.useState<boolean>(false);
+
+  const isDashboard = /^\/dashboard\/[^/]+$/.test(location.pathname);
+  const isMyCourses = /^\/mycourses\/[^/]+$/.test(location.pathname);
+  const isTeacher = location.pathname === "teacher" ? true : false;
+  const isRefunds = /^\/refunds\/[^/]+$/.test(location.pathname);
+  const isMessages = /^\/messages\/[^/]+$/.test(location.pathname);
+  const isNeedHelp = location.pathname === "needhelp" ? true : false;
+  const isSettings = /^\/setting\/[^/]+$/.test(location.pathname);
+
+  const navigate = useNavigate();
+
+  const { user } = useUser();
 
   return (
     <div
@@ -46,7 +61,11 @@ export const SidebarNav = () => {
             isOpenSidebar ? "items-start" : "items-center"
           } transition-all`}
         >
-          <div className="flex flex-row items-center gap-1 cursor-pointer">
+          <div
+            className={`flex flex-row items-center gap-3 cursor-pointer px-4 py-2 w-full ${
+              isDashboard && "bg-gray-600 bg-opacity-40 rounded-md"
+            }`}
+          >
             <i>
               <IoHomeOutline size={25} color="#fff" />
             </i>
@@ -58,7 +77,12 @@ export const SidebarNav = () => {
               Inicio
             </p>
           </div>
-          <div className="flex flex-row items-center gap-1 cursor-pointer">
+          <div
+            className={`flex flex-row items-center gap-3 px-4 py-2 cursor-pointer w-full ${
+              isMyCourses && "bg-gray-600 bg-opacity-40 rounded-md"
+            }`}
+            onClick={() => navigate(`/mycourses/${user?.uid}`)}
+          >
             <i>
               <BiBookAlt size={25} color="#fff" />
             </i>
@@ -70,7 +94,11 @@ export const SidebarNav = () => {
               Meus Cursos
             </p>
           </div>
-          <div className="flex flex-row items-center gap-1 cursor-pointer">
+          <div
+            className={`flex flex-row items-center gap-3 px-4 py-2 cursor-pointer w-full ${
+              isTeacher && "bg-gray-600 bg-opacity-40 rounded-md"
+            }`}
+          >
             <i>
               <FaChalkboardTeacher size={25} color="#fff" />
             </i>
@@ -82,7 +110,11 @@ export const SidebarNav = () => {
               Professor
             </p>
           </div>
-          <div className="flex flex-row items-center gap-1 cursor-pointer">
+          <div
+            className={`flex flex-row items-center gap-3 px-4 py-2 cursor-pointer w-full ${
+              isRefunds && "bg-gray-600 bg-opacity-40 rounded-md"
+            }`}
+          >
             <i>
               <PiMoney size={25} color="#fff" />
             </i>
@@ -94,7 +126,11 @@ export const SidebarNav = () => {
               Reembolso
             </p>
           </div>
-          <div className="flex flex-row items-center gap-1 cursor-pointer">
+          <div
+            className={`flex flex-row items-center gap-3 px-4 py-2 cursor-pointer w-full ${
+              isMessages && "bg-gray-600 bg-opacity-40 rounded-md"
+            }`}
+          >
             <i>
               <IoChatbubbleOutline size={25} color="#fff" />
             </i>
@@ -117,7 +153,11 @@ export const SidebarNav = () => {
           isOpenSidebar ? "items-start" : "items-center"
         } `}
       >
-        <div className="flex flex-row items-center gap-1 cursor-pointer">
+        <div
+          className={`flex flex-row items-center gap-3 px-4 py-2 cursor-pointer ${
+            isNeedHelp && "bg-gray-600 bg-opacity-40 rounded-md"
+          }`}
+        >
           <i>
             <IoInformationCircleOutline size={25} color="#fff" />
           </i>
@@ -129,7 +169,11 @@ export const SidebarNav = () => {
             Precisa de ajuda?
           </p>
         </div>
-        <div className="flex flex-row items-center gap-1 cursor-pointer">
+        <div
+          className={`flex flex-row items-center gap-3 px-4 py-2 cursor-pointer ${
+            isSettings && "bg-gray-600 bg-opacity-40 rounded-md"
+          }`}
+        >
           <i className={`active:rotate-180 transition-all`}>
             <IoSettingsOutline size={25} color="#fff" />
           </i>
