@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { loadDataUser } from "../../hooks/loadDataUser";
 import React from "react";
 import { UserDataProps, useUser } from "../../contexts/userDataContext";
@@ -9,6 +9,7 @@ import { MyCalendar } from "./components/MyCalendar";
 import { SidebarUser } from "../../components/sideBarUser";
 
 export default function Dashboard() {
+  const navigate = useNavigate();
   const { uid } = useParams();
   const { setUser } = useUser();
 
@@ -64,13 +65,12 @@ export default function Dashboard() {
         </div>
         <div className="w-full h-[360px] max-h-[380px] bg-white mt-5 rounded-xl px-2 py-1 flex flex-col">
           <div className="flex justify-between">
-            <button>
-              <h1 className="text-xl hover:underline font-secondary">
-                Meus Cursos
-              </h1>
-            </button>
-            <button>
-              <h2 className="text-xl hover:underline font-secondary">
+            <h1 className="text-xl font-secondary">
+              Meus Cursos
+            </h1>
+
+            <button onClick={() => navigate(`/mycourses/${uid}`)}>
+              <h2 className="text-xl hover:underline font-secondary text-gray-500">
                 Ver Todos
               </h2>
             </button>
