@@ -65,6 +65,7 @@ export const SidebarNav = () => {
             className={`flex flex-row items-center gap-3 cursor-pointer px-4 py-2 w-full ${
               isDashboard && "bg-gray-600 bg-opacity-40 rounded-md"
             }`}
+            onClick={() => navigate(`/dashboard/${user?.uid}`)}
           >
             <i>
               <IoHomeOutline size={25} color="#fff" />
