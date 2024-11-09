@@ -2,7 +2,7 @@ import React from "react";
 import { BiPlay } from "react-icons/bi";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaRegStar, FaShare, FaStar } from "react-icons/fa";
-import { IoArchive, IoClose } from "react-icons/io5";
+import { IoArchive } from "react-icons/io5";
 import { MdFavorite } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
@@ -10,15 +10,11 @@ export const CourseCard = () => {
   const navigate = useNavigate();
 
   const [isOpenToolbar, setIsOpenToolbar] = React.useState<boolean>(false);
-  const [isOpenModalStars, setIsOpenModalStars] =
-    React.useState<boolean>(false);
   const [rating, setRating] = React.useState<number>(0);
 
   const handleRating = (star: number) => {
     setRating(star);
   };
-
-  const estrelasAvaliadas: number = 3;
 
   return (
     <div className="w-72 h-[300px] border border-gray-300 rounded-lg p-2 relative ">
@@ -71,9 +67,12 @@ export const CourseCard = () => {
         </div>
       </div>
       <p className="text-2xl font-secondary">titulo do curso</p>
-      <a href="#" className="text-xl font-secondary text-gray-500">
-        <p>quem fez o curso</p>
-      </a>
+      <button
+        onClick={() => navigate(`/teacher`)}
+        className="text-xl font-secondary text-gray-500"
+      >
+        quem fez o curso
+      </button>
       <div className="w-full relative bg-gray-300 h-1 flex  flex-col items-end">
         <div className="w-1/2 bg-gray-800 absolute top-0 left-0 h-full"></div>
         <p>50%</p>
