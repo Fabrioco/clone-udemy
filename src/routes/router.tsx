@@ -11,6 +11,7 @@ import { AuthProvider } from "../contexts/authContext";
 import { NotificationProvider } from "../contexts/notificationContext";
 import { UserDataProvider } from "../contexts/userDataContext";
 import MyCourses from "../pages/MyCourses";
+import Teacher from "../pages/Teacher";
 
 export const RouterApp = () => {
   return (
@@ -25,6 +26,7 @@ export const RouterApp = () => {
               <Route path="/register" element={<Register />} />
               <Route path="course/:course" element={<Course />} />
               <Route path="/mycourses/:uid" element={<MyCourses />} />
+              <Route path="/teacher" element={<Teacher />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </AuthProvider>
