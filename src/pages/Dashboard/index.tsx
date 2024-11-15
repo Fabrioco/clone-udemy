@@ -61,9 +61,7 @@ export default function Dashboard() {
         </div>
         <div className="w-full h-1/2 max-h-[380px] bg-white mt-5 rounded-xl px-2 py-1 flex flex-col">
           <div className="flex justify-between">
-            <h1 className="text-xl font-secondary">
-              Meus Cursos
-            </h1>
+            <h1 className="text-xl font-secondary">Meus Cursos</h1>
 
             <button onClick={() => navigate(`/mycourses/${uid}`)}>
               <h2 className="text-xl hover:underline font-secondary text-gray-500">
@@ -143,13 +141,10 @@ export default function Dashboard() {
           )}
         </div>
       </div>
-      <div className="min-h-screen">
-        <SidebarUser
-          isOpenSidebarUser={isOpenSidebarUser}
-          setIsOpenSidebarUser={setIsOpenSidebarUser}
-        />
-      </div>
-      
+      <SidebarUser
+        isOpenSidebarUser={isOpenSidebarUser}
+        setIsOpenSidebarUser={setIsOpenSidebarUser}
+      />
     </div>
   );
 }
