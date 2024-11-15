@@ -18,7 +18,7 @@ export const SidebarNav = () => {
   const isDashboard = /^\/dashboard\/[^/]+$/.test(location.pathname);
   const isMyCourses = /^\/mycourses\/[^/]+$/.test(location.pathname);
   const isTeacher = location.pathname === "/teacher" ? true : false;
-  const isRefunds = /^\/refunds\/[^/]+$/.test(location.pathname);
+  const isRefunds = location.pathname === "/refunds" ? true : false
   const isMessages = /^\/messages\/[^/]+$/.test(location.pathname);
   const isNeedHelp = location.pathname === "needhelp" ? true : false;
   const isSettings = /^\/setting\/[^/]+$/.test(location.pathname);
