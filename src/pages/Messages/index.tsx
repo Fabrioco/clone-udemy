@@ -2,7 +2,7 @@ import { Chat } from "./components/Chat";
 
 export default function Messages() {
   return (
-    <div className="max-w-full h-full flex flex-row  bg-white rounded-2xl overflow-x-hidden">
+    <div className="w-full h-full flex flex-row  bg-white rounded-2xl overflow-x-hidden">
 
       <div className="border-r border-gray-300 w-3/12 h-full overflow-y-auto">
         <Chat />
