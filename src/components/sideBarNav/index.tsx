@@ -31,7 +31,7 @@ export const SidebarNav = () => {
     <div
       className={`${
         isOpenSidebar ? "w-[220px]" : "w-28"
-      } h-full bg-[#282828] flex flex-col p-4 rounded-2xl gap-4 justify-between transition-all shadow shadow-black `}
+      } h-full bg-[#282828] flex flex-col  p-4 rounded-2xl gap-4 items-center justify-between transition-all shadow shadow-black `}
     >
       <div className="h-1/2 flex flex-col justify-between">
         <div
@@ -152,7 +152,7 @@ export const SidebarNav = () => {
         </div>
       </div>
       <div
-        className={`flex flex-col gap-3 items-start ${
+        className={`flex flex-col gap-3 items-start h-1/2 ${
           isOpenSidebar ? "items-start" : "items-center"
         } `}
       >
