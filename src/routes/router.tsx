@@ -14,6 +14,7 @@ import MyCourses from "../pages/MyCourses";
 import Teacher from "../pages/Teacher";
 import Refunds from "../pages/Refunds";
 import { SidebarNav } from "../components/sideBarNav";
+import Messages from "../pages/Messages";
 
 export const RouterApp = () => {
   const location = useLocation();
@@ -37,6 +38,7 @@ export const RouterApp = () => {
             <Route path="/mycourses/:uid" element={<MyCourses />} />
             <Route path="/teacher" element={<Teacher />} />
             <Route path="/refunds" element={<Refunds />} />
+            <Route path="/messages" element={<Messages />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
