@@ -1,8 +1,13 @@
 import { RouterApp } from "../routes/router";
+import { BrowserRouter as Router } from "react-router-dom";
 
 function App() {
   return (
-      <RouterApp />
+    <div className="flex px-20 py-10 w-full h-screen gap-10">
+      <Router>
+        <RouterApp />
+      </Router>
+    </div>
   );
 }
 
