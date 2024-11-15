@@ -2,7 +2,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { loadDataUser } from "../../hooks/loadDataUser";
 import React from "react";
 import { UserDataProps, useUser } from "../../contexts/userDataContext";
-import { SidebarNav } from "../../components/sideBarNav";
 import { FaBell, FaSearch, FaStar } from "react-icons/fa";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { MyCalendar } from "./components/MyCalendar";
@@ -27,11 +26,8 @@ export default function Dashboard() {
   }, [setUser, uid]);
 
   return (
-    <div className="w-full h-full flex flex-row justify-between gap-10">
-      <div className="min-h-full pl-20 py-10">
-        <SidebarNav />
-      </div>
-      <div className="flex flex-col w-full py-10">
+    <div className="w-full h-full flex flex-row justify-between">
+      <div className="flex flex-col w-full">
         <div className="w-full h-14 mx-auto flex justify-between gap-2">
           <div
             className={`${
@@ -63,7 +59,7 @@ export default function Dashboard() {
             </div>
           )}
         </div>
-        <div className="w-full h-[360px] max-h-[380px] bg-white mt-5 rounded-xl px-2 py-1 flex flex-col">
+        <div className="w-full h-1/2 max-h-[380px] bg-white mt-5 rounded-xl px-2 py-1 flex flex-col">
           <div className="flex justify-between">
             <h1 className="text-xl font-secondary">
               Meus Cursos
@@ -103,8 +99,7 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-
-        <div className="w-full h-[400px] mt-5 flex justify-between">
+        <div className="w-full h-1/2 mt-5 flex justify-between">
           <div
             className={`${
               isOpenSidebarUser ? "w-full" : "w-8/12"
@@ -154,6 +149,7 @@ export default function Dashboard() {
           setIsOpenSidebarUser={setIsOpenSidebarUser}
         />
       </div>
+      
     </div>
   );
 }
