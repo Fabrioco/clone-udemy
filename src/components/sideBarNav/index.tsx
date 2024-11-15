@@ -116,6 +116,7 @@ export const SidebarNav = () => {
             className={`flex flex-row items-center gap-3 px-4 py-2 cursor-pointer w-full ${
               isRefunds && "bg-gray-600 bg-opacity-40 rounded-md"
             }`}
+            onClick={() => navigate("/refunds")}
           >
             <i>
               <PiMoney size={25} color="#fff" />
