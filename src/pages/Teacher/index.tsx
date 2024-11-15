@@ -1,7 +1,7 @@
 
 export default function Teacher() {
   return (
-    <div className="w-screen h-screen flex py-10">
+    <div className="w-screen h-full flex">
       <div className="w-full h-full bg-white rounded-2xl flex flex-col items-center justify-around">
         <div className="w-10/12 h-auto flex items-center justify-center">
           <div className="w-1/2">
