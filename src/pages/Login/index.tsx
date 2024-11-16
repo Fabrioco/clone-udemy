@@ -1,14 +1,18 @@
 import React from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useAuth } from "../../contexts/authContext";
+import { useNotification } from "../../contexts/notificationContext";
+import { AuthError } from "firebase/auth";
 
 export default function Login() {
   const passwordInputRef = React.useRef<HTMLInputElement | null>(null);
+  const [loading, setLoading] = React.useState<boolean>(false);
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
   const [emailInput, setEmailInput] = React.useState<string>("");
   const [passwordInput, setPasswordInput] = React.useState<string>("");
 
   const { signIn } = useAuth();
+  const { showNotification } = useNotification();
 
   const togglePassword = () => {
     const input = passwordInputRef.current;
@@ -18,13 +22,21 @@ export default function Login() {
     }
   };
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!emailInput || !passwordInput) {
-      alert("Preencha todos os campos");
+      showNotification("Preencha todos os campos", "error");
       return;
     }
-    signIn(emailInput, passwordInput);
+    try {
+      setLoading(true);
+      await signIn(emailInput, passwordInput);
+    } catch (error) {
+      showNotification("Verifique suas credenciais", "error");
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -78,8 +90,9 @@ export default function Login() {
         <button
           className="bg-gray-200 px-8 py-4 font-tertiary uppercase rounded-md shadow-sm shadow-black active:bg-gray-400 active:shadow-md active:shadow-gray-400"
           type="submit"
+          disabled={loading}
         >
-          Confirmar
+          {!loading ? "Entrar" : "Entrando..."}
         </button>
       </form>
       <div className="w-1/2 font-secondary text-lg">
