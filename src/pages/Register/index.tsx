@@ -1,13 +1,16 @@
 import React from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useAuth } from "../../contexts/authContext";
+import { useNotification } from "../../contexts/notificationContext";
 
 export default function Register() {
   const { signUp } = useAuth();
+  const { showNotification } = useNotification();
 
   const passwordInputRef = React.useRef<HTMLInputElement>(null);
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
   const [acceptedTerms, setAcceptedTerms] = React.useState<boolean>(false);
+  const [loading, setLoading] = React.useState<boolean>(false);
 
   const [nameInput, setNameInput] = React.useState<string>("");
   const [emailInput, setEmailInput] = React.useState<string>("");
@@ -25,12 +28,21 @@ export default function Register() {
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!acceptedTerms) return;
+    if (!acceptedTerms) {
+      showNotification("Aceite os termos", "error");
+    }
     if (!emailInput || !passwordInput) {
-      alert("Preencha todos os campos");
+      showNotification("Preencha todos os campos", "error");
       return;
     }
-    signUp(nameInput, emailInput, passwordInput);
+    try {
+      setLoading(true);
+      signUp(nameInput, emailInput, passwordInput);
+    } catch (error) {
+      showNotification("Verifique suas credenciais", "error");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -44,7 +56,7 @@ export default function Register() {
           <label htmlFor="nameInputRegister">Nome</label>
           <input
             type="text"
-            name="nameInputRegister"
+            id="nameInputRegister"
             className="w-full bg-gray-200 px-4 py-2 rounded-md outline-none"
             placeholder="Nome aqui"
             value={nameInput}
@@ -55,7 +67,7 @@ export default function Register() {
           <label htmlFor="emailInputRegister">Email</label>
           <input
             type="email"
-            name="emailInputRegister"
+            id="emailInputRegister"
             placeholder="exemplo@gmail.com"
             className="w-full bg-gray-200 px-4 py-2 rounded-md outline-none"
             value={emailInput}
@@ -68,7 +80,7 @@ export default function Register() {
             <input
               className="w-full bg-gray-200 rounded-md outline-none"
               type="password"
-              name="passwordInputLogin"
+              id="passwordInputLogin"
               placeholder="********"
               min={8}
               ref={passwordInputRef}
@@ -91,7 +103,7 @@ export default function Register() {
           <label htmlFor="keepLoggedCheckbox">Li e aceito os termos.</label>
           <input
             type="checkbox"
-            name="keepLoggedCheckbox"
+            id="keepLoggedCheckbox"
             className="w-8 h-8 appearance-none rounded-full checked:bg-gray-600 border-2 cursor-pointer"
             checked={acceptedTerms}
             onChange={(e) => setAcceptedTerms(e.target.checked)}
@@ -101,7 +113,7 @@ export default function Register() {
           className="bg-gray-200 px-8 py-4 font-tertiary uppercase rounded-md shadow-sm shadow-black active:bg-gray-400 active:shadow-md active:shadow-gray-400"
           type="submit"
         >
-          Registrar
+          {!loading ? "Registrar" : "Registrando..."}
         </button>
       </form>
       <div className="w-1/2 font-secondary text-lg">

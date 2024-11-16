@@ -53,6 +53,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       };
       navigate(`/dashboard/${uid}`);
       setUser(data);
+      showNotification('Seja bem-vindo','success')
     } catch (error) {
       if (error instanceof FirebaseError) {
         if (error.code === "auth/email-already-in-use") {
