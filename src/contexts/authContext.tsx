@@ -53,7 +53,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       };
       navigate(`/dashboard/${uid}`);
       setUser(data);
-      showNotification('Seja bem-vindo','success')
+      showNotification("Seja bem-vindo", "success");
     } catch (error) {
       if (error instanceof FirebaseError) {
         if (error.code === "auth/email-already-in-use") {
@@ -86,10 +86,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         };
         setUser(userData);
 
-        setTimeout(() => {
-          showNotification("Bem-vindo de volta!", "success");
-          navigate(`/dashboard/${uid}`);
-        }, 2000);
+        showNotification("Bem-vindo de volta!", "success");
+        navigate(`/dashboard/${uid}`);
       } else {
         showNotification("Usuário não encontrado.", "error");
       }
