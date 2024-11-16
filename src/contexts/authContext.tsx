@@ -53,6 +53,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       };
       navigate(`/dashboard/${uid}`);
       setUser(data);
+      showNotification('Seja bem-vindo','success')
     } catch (error) {
       if (error instanceof FirebaseError) {
         if (error.code === "auth/email-already-in-use") {
@@ -65,24 +66,38 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const signIn = async (email: string, password: string): Promise<void> => {
-    const authResponse = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    const uid = authResponse.user.uid;
-    const docSnap = await getDoc(doc(db, "users", uid));
+    try {
+      const authResponse = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const uid = authResponse.user.uid;
 
-    if (docSnap.exists()) {
-      const data: UserDataProps = {
-        uid: uid,
-        name: docSnap.data()?.name,
-        email: docSnap.data()?.email,
-        password: docSnap.data()?.password,
-      };
-      setUser(data);
-      navigate(`/dashboard/${uid}`);
-      showNotification("Bem vindo de volta!", "success");
+      const userDocRef = doc(db, "users", uid);
+      const docSnap = await getDoc(userDocRef);
+
+      if (docSnap.exists()) {
+        const userData: UserDataProps = {
+          uid: uid,
+          name: docSnap.data()?.name || "Usuário",
+          email: docSnap.data()?.email || email,
+          password: docSnap.data()?.password || "",
+        };
+        setUser(userData);
+
+        setTimeout(() => {
+          showNotification("Bem-vindo de volta!", "success");
+          navigate(`/dashboard/${uid}`);
+        }, 2000);
+      } else {
+        showNotification("Usuário não encontrado.", "error");
+      }
+    } catch (error) {
+      showNotification(
+        "Erro ao fazer login. Verifique suas credenciais.",
+        "error"
+      );
     }
   };
 
