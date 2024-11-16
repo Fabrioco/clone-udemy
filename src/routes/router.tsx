@@ -11,7 +11,6 @@ import { AuthProvider } from "../contexts/authContext";
 import { NotificationProvider } from "../contexts/notificationContext";
 import { UserDataProvider } from "../contexts/userDataContext";
 import MyCourses from "../pages/MyCourses";
-import Teacher from "../pages/Teacher";
 import Refunds from "../pages/Refunds";
 import { SidebarNav } from "../components/sideBarNav";
 import Messages from "../pages/Messages";
@@ -36,7 +35,6 @@ export const RouterApp = () => {
             <Route path="/register" element={<Register />} />
             <Route path="course/:course" element={<Course />} />
             <Route path="/mycourses/:uid" element={<MyCourses />} />
-            <Route path="/teacher" element={<Teacher />} />
             <Route path="/refunds" element={<Refunds />} />
             <Route path="/messages" element={<Messages />} />
             <Route path="*" element={<NotFound />} />

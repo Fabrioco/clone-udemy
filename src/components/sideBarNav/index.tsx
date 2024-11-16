@@ -17,7 +17,6 @@ export const SidebarNav = () => {
 
   const isDashboard = /^\/dashboard\/[^/]+$/.test(location.pathname);
   const isMyCourses = /^\/mycourses\/[^/]+$/.test(location.pathname);
-  const isTeacher = location.pathname === "/teacher" ? true : false;
   const isRefunds = location.pathname === "/refunds" ? true : false;
   const isMessages = location.pathname === "/messages" ? true : false;
   const isNeedHelp = location.pathname === "/needhelp" ? true : false;
@@ -93,23 +92,6 @@ export const SidebarNav = () => {
               }`}
             >
               Meus Cursos
-            </p>
-          </div>
-          <div
-            className={`flex flex-row items-center gap-3 px-4 py-2 cursor-pointer w-full ${
-              isTeacher && "bg-gray-600 bg-opacity-40 rounded-md"
-            }`}
-            onClick={() => navigate("/teacher")}
-          >
-            <i>
-              <FaChalkboardTeacher size={25} color="#fff" />
-            </i>
-            <p
-              className={`text-xl text-white font-secondary ${
-                isOpenSidebar ? "block" : "hidden"
-              }`}
-            >
-              Professor
             </p>
           </div>
           <div
