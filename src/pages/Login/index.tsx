@@ -2,7 +2,6 @@ import React from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useAuth } from "../../contexts/authContext";
 import { useNotification } from "../../contexts/notificationContext";
-import { AuthError } from "firebase/auth";
 
 export default function Login() {
   const passwordInputRef = React.useRef<HTMLInputElement | null>(null);
