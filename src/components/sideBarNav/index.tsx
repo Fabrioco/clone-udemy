@@ -6,7 +6,6 @@ import {
   IoSettingsOutline,
 } from "react-icons/io5";
 import { BiBookAlt } from "react-icons/bi";
-import { FaChalkboardTeacher } from "react-icons/fa";
 import { PiMoney } from "react-icons/pi";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useUser } from "../../contexts/userDataContext";

@@ -1,7 +1,10 @@
+import React from "react";
+import { VideoPlayer } from "./components/VideoPlayer";
+
 export default function Course() {
   return (
-    <div>
-      <h1>Pagina do curso</h1>
+    <div className="w-full h-full bg-white rounded-2xl flex flex-row">
+      <VideoPlayer />
     </div>
   );
 }
