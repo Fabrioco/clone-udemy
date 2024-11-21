@@ -96,7 +96,7 @@ export const VideoPlayer = () => {
   }, [progress, duration]);
 
   return (
-    <div className="w-9/12 h-auto flex flex-col border-r border-gray-300">
+    <div className="w-9/12 h-auto flex flex-col border-r border-gray-300 overflow-y-auto font-secondary">
       <div className="relative w-full h-auto">
         <ReactPlayer
           ref={(playerRef) => (player = playerRef)}
@@ -152,7 +152,7 @@ export const VideoPlayer = () => {
         <select
           value={playbackRate}
           onChange={(e) => setPlaybackRate(Number(e.target.value))}
-          className="bg-transparent cursor-pointer focus:text-black"
+          className="bg-transparent cursor-pointer focus:text-black focus:outline-none"
         >
           <option value={0.5}>0.5x</option>
           <option value={0.75}>0.75x</option>
@@ -164,6 +164,28 @@ export const VideoPlayer = () => {
           Duração do vídeo: {Math.floor(duration / 60)}:
           {String(Math.floor(duration % 60)).padStart(2, "0")}
         </p>
+      </div>
+
+      <div className="w-full h-auto flex flex-col">
+        <nav className="w-full h-10 flex justify-around border-b-2 border-gray-300 text-xl">
+          <button className="border-r-2 border-gray-300 w-full font-semibold">
+            Visão Geral
+          </button>
+          <button className="w-full">Avaliações e Comentários</button>
+        </nav>
+        <div className="text-2xl mt-2 p-2">
+          <h1 className="text-2xl">titulo do curso</h1>
+          <h2 className="text-xl text-gray-600 cursor-pointer">quem fez</h2>
+        </div>
+        <div className="mt-4 p-2">
+          <p className="text-xl uppercase">Sobre o curso</p>
+          <p className="mt-1 w-10/12">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Accusantium, voluptas! Dignissimos voluptates quas aperiam non unde
+            soluta sit nisi a quia, dolorum rerum, quisquam nobis exercitationem
+            laborum iure harum ratione?
+          </p>
+        </div>
       </div>
     </div>
   );
