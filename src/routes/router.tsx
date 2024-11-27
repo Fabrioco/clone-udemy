@@ -14,6 +14,7 @@ import MyCourses from "../pages/MyCourses";
 import Refunds from "../pages/Refunds";
 import { SidebarNav } from "../components/sideBarNav";
 import Messages from "../pages/Messages";
+import Private from "./private";
 
 export const RouterApp = () => {
   const location = useLocation();
@@ -30,13 +31,48 @@ export const RouterApp = () => {
           {showSidebar && <SidebarNav />}
           <Routes>
             <Route path="/" element={<Navigate to={"/login"} replace />} />
-            <Route path="/dashboard/:uid" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="course/:course" element={<Course />} />
-            <Route path="/mycourses/:uid" element={<MyCourses />} />
-            <Route path="/refunds" element={<Refunds />} />
-            <Route path="/messages" element={<Messages />} />
+            <Route
+              path="/dashboard/:uid"
+              element={
+                <Private>
+                  <Dashboard />
+                </Private>
+              }
+            />
+            <Route
+              path="course/:course"
+              element={
+                <Private>
+                  <Course />
+                </Private>
+              }
+            />
+            <Route
+              path="/mycourses/:uid"
+              element={
+                <Private>
+                  <MyCourses />
+                </Private>
+              }
+            />
+            <Route
+              path="/refunds"
+              element={
+                <Private>
+                  <Refunds />
+                </Private>
+              }
+            />
+            <Route
+              path="/messages"
+              element={
+                <Private>
+                  <Messages />
+                </Private>
+              }
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>

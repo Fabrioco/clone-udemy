@@ -3,6 +3,7 @@ import { auth, db } from "../services/firebaseConnection";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { FirebaseError } from "firebase/app";
@@ -13,7 +14,15 @@ import { UserDataProps, useUser } from "./userDataContext";
 type AuthContextType = {
   signUp: (name: string, email: string, password: string) => Promise<void>;
 
-  signIn: (email: string, password: string) => Promise<void>;
+  signIn: (
+    email: string,
+    password: string,
+    keepLogin: boolean
+  ) => Promise<void>;
+
+  KeepUserLog: (nameUser: string) => void;
+
+  logOut: () => void;
 };
 
 interface AuthProviderProps {
@@ -65,7 +74,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const signIn = async (email: string, password: string): Promise<void> => {
+  const signIn = async (
+    email: string,
+    password: string,
+    keepLogin: boolean
+  ): Promise<void> => {
     try {
       const authResponse = await signInWithEmailAndPassword(
         auth,
@@ -88,6 +101,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
         showNotification("Bem-vindo de volta!", "success");
         navigate(`/dashboard/${uid}`);
+        if (keepLogin) {
+          KeepUserLog(userData.uid);
+        } else {
+          userTemporary(userData.uid);
+        }
       } else {
         showNotification("Usuário não encontrado.", "error");
       }
@@ -99,8 +117,27 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
+  const logOut = async () => {
+    await signOut(auth);
+    if (localStorage.getItem("user")) {
+      localStorage.removeItem("user");
+    } else {
+      sessionStorage.removeItem("userTemporary");
+    }
+  };
+
+  const KeepUserLog = (uidUser: string) => {
+    const uidUserJson = JSON.stringify(uidUser);
+    localStorage.setItem("user", uidUserJson);
+  };
+
+  const userTemporary = (uidUser: string) => {
+    const uidUserJson = JSON.stringify(uidUser);
+    sessionStorage.setItem("userTemporary", uidUserJson);
+  };
+
   return (
-    <AuthContext.Provider value={{ signUp, signIn }}>
+    <AuthContext.Provider value={{ signUp, signIn, KeepUserLog, logOut }}>
       {children}
     </AuthContext.Provider>
   );

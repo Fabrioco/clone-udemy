@@ -9,6 +9,7 @@ export default function Login() {
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
   const [emailInput, setEmailInput] = React.useState<string>("");
   const [passwordInput, setPasswordInput] = React.useState<string>("");
+  const [keepLogin, setKeepLoggin] = React.useState<boolean>(false);
 
   const { signIn } = useAuth();
   const { showNotification } = useNotification();
@@ -21,6 +22,10 @@ export default function Login() {
     }
   };
 
+  const keepLoggedCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setKeepLoggin(e.target.checked);
+  };
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!emailInput || !passwordInput) {
@@ -29,7 +34,7 @@ export default function Login() {
     }
     try {
       setLoading(true);
-      await signIn(emailInput, passwordInput);
+      await signIn(emailInput, passwordInput, keepLogin);
     } catch (error) {
       showNotification("Verifique suas credenciais", "error");
       console.log(error);
@@ -84,6 +89,8 @@ export default function Login() {
             type="checkbox"
             name="keepLoggedCheckbox"
             className="w-8 h-8 appearance-none rounded-full checked:bg-gray-600 border-2 cursor-pointer"
+            checked={keepLogin}
+            onChange={keepLoggedCheckbox}
           />
         </div>
         <button

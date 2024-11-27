@@ -3,6 +3,7 @@ import { BiBookAlt } from "react-icons/bi";
 import { FaBell } from "react-icons/fa";
 import { BsGraphUpArrow } from "react-icons/bs";
 import { Graphics } from "./components/Graphics";
+import { useAuth } from "../../contexts/authContext";
 
 type SidebarUserProps = {
   isOpenSidebarUser: boolean;
@@ -13,6 +14,11 @@ export const SidebarUser: React.FC<SidebarUserProps> = ({
   isOpenSidebarUser,
   setIsOpenSidebarUser,
 }) => {
+  const { logOut } = useAuth();
+
+  const handleLogOut = ()=>{
+    logOut()
+  }
   return (
     <div
       className={`${
@@ -84,7 +90,7 @@ export const SidebarUser: React.FC<SidebarUserProps> = ({
         <div className="border border-gray-300 rounded-md p-1 h-[180px]">
           <Graphics />
         </div>
-        <button className="text-xl bg-red-500 text-black mx-auto w-auto px-4 py-2 rounded-lg shadow shadow-red-300 active:bg-red-600">
+        <button className="text-xl bg-red-500 text-black mx-auto w-auto px-4 py-2 rounded-lg shadow shadow-red-300 active:bg-red-600" onClick={handleLogOut}>
           Log Out
         </button>
       </div>
