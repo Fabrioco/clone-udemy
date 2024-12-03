@@ -8,11 +8,9 @@ import { MyCalendar } from "./components/MyCalendar";
 import { SidebarUser } from "../../components/sideBarUser";
 
 export default function Dashboard() {
-  const isTeacher: boolean = false;
-
   const navigate = useNavigate();
   const { uid } = useParams();
-  const { setUser } = useUser();
+  const { setUser, user } = useUser();
 
   const [isOpenSidebarUser, setIsOpenSidebarUser] =
     React.useState<boolean>(false);
@@ -45,9 +43,11 @@ export default function Dashboard() {
           </div>
           {!isOpenSidebarUser && (
             <div className="flex gap-5 items-center">
-              <button className="border border-gray-400 bg-white px-4 py-2 rounded-md shadow-md active:shadow-lg active:bg-gray-100 font-tertiary uppercase text-sm">
-                Ser professor
-              </button>
+              {user?.isTeacher && (
+                <button className="border border-gray-400 bg-white px-4 py-2 rounded-md shadow-md active:shadow-lg active:bg-gray-100 font-tertiary uppercase text-sm">
+                  Ser professor
+                </button>
+              )}
               <i className="cursor-pointer">
                 <FaBell size={30} color="#a1a1a1" />
               </i>

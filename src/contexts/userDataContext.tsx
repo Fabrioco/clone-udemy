@@ -12,6 +12,7 @@ export interface UserDataProps {
   name: string;
   email: string;
   password: string;
+  isTeacher: boolean;
 }
 
 const UserDataContext = React.createContext<UserDataContextType | undefined>(
