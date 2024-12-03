@@ -53,12 +53,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         name,
         email,
         password,
+        isTeacher: false,
       });
       const data: UserDataProps = {
         uid,
         name,
         email,
         password,
+        isTeacher: false,
       };
       navigate(`/dashboard/${uid}`);
       setUser(data);
@@ -96,6 +98,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           name: docSnap.data()?.name || "Usuário",
           email: docSnap.data()?.email || email,
           password: docSnap.data()?.password || "",
+          isTeacher: docSnap.data()?.isTeacher,
         };
         setUser(userData);
 

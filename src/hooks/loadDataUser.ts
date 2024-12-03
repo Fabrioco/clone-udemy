@@ -15,6 +15,7 @@ export const loadDataUser = async (
       name: docSnap.data().name,
       email: docSnap.data().email,
       password: docSnap.data().password,
+      isTeacher: docSnap.data().isTeacher,
     };
     return data;
   }

@@ -43,7 +43,7 @@ export default function Dashboard() {
           </div>
           {!isOpenSidebarUser && (
             <div className="flex gap-5 items-center">
-              {user?.isTeacher && (
+              {!user?.isTeacher && (
                 <button className="border border-gray-400 bg-white px-4 py-2 rounded-md shadow-md active:shadow-lg active:bg-gray-100 font-tertiary uppercase text-sm">
                   Ser professor
                 </button>
