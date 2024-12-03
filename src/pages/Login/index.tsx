@@ -2,17 +2,31 @@ import React from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useAuth } from "../../contexts/authContext";
 import { useNotification } from "../../contexts/notificationContext";
+import { useUser } from "../../contexts/userDataContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
   const passwordInputRef = React.useRef<HTMLInputElement | null>(null);
   const [loading, setLoading] = React.useState<boolean>(false);
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
   const [emailInput, setEmailInput] = React.useState<string>("");
   const [passwordInput, setPasswordInput] = React.useState<string>("");
   const [keepLogin, setKeepLoggin] = React.useState<boolean>(false);
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const { signIn } = useAuth();
+  const { user } = useUser();
   const { showNotification } = useNotification();
+
+  React.useEffect(() => {
+    if (user) {
+      setIsLoading(true);
+      setTimeout(() => {
+        navigate(`/dashboard/${user.uid}`);
+      }, 2000);
+    }
+  }, [user]);
 
   const togglePassword = () => {
     const input = passwordInputRef.current;
@@ -42,6 +56,14 @@ export default function Login() {
       setLoading(false);
     }
   };
+
+  if (isLoading) {
+    return (
+      <p className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-3xl font-primary">
+        Carregando...
+      </p>
+    );
+  }
 
   return (
     <div className="container mx-auto w-[600px] h-[700px] bg-white rounded-2xl flex flex-col items-center justify-around border border-gray-300 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
