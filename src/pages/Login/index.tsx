@@ -26,7 +26,7 @@ export default function Login() {
         navigate(`/dashboard/${user.uid}`);
       }, 2000);
     }
-  }, [user]);
+  }, [user, navigate]);
 
   const togglePassword = () => {
     const input = passwordInputRef.current;

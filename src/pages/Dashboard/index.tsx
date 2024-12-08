@@ -10,7 +10,7 @@ import { SidebarUser } from "../../components/sideBarUser";
 export default function Dashboard() {
   const navigate = useNavigate();
   const { uid } = useParams();
-  const { setUser, user } = useUser();
+  const { setUser } = useUser();
 
   const [isOpenSidebarUser, setIsOpenSidebarUser] =
     React.useState<boolean>(false);

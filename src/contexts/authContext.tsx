@@ -121,6 +121,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const logOut = async () => {
+    setUser(null);
+    window.location.reload();
     await signOut(auth);
     if (localStorage.getItem("user")) {
       localStorage.removeItem("user");
