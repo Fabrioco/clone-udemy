@@ -1,22 +1,7 @@
-import { Chat } from "./components/Chat";
 
 export default function Messages() {
   return (
     <div className="w-full h-full flex flex-row  bg-white rounded-2xl overflow-x-hidden">
-
-      <div className="border-r border-gray-300 w-3/12 h-full overflow-y-auto">
-        <Chat />
-        <Chat />
-        <Chat />
-        <Chat />
-        <Chat />
-        <Chat />
-        <Chat />
-        <Chat />
-        <Chat />
-        <Chat />
-      </div>
-
       <div className="w-9/12 h-full rounded-br-2xl overflow-y-hidden">
         <div className="w-full h-32 bg-white rounded-tr-2xl flex items-center border-b border-gray-300">
           <img
@@ -37,7 +22,6 @@ export default function Messages() {
           </div>
         </div>
       </div>
-
     </div>
   );
 }
